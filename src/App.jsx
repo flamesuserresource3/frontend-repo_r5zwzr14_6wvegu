@@ -1,28 +1,28 @@
-import { useState } from 'react'
+import React, { useState } from 'react';
+import Header from './components/Header';
+import UploadSection from './components/UploadSection';
+import LandmarkGuide from './components/LandmarkGuide';
+import ScoreCard from './components/ScoreCard';
+import HowItWorks from './components/HowItWorks';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [imageSrc, setImageSrc] = useState(null);
+  const [metrics, setMetrics] = useState(null);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
-        </div>
-      </div>
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <Header />
+      <main className="max-w-5xl mx-auto px-4 pb-16 space-y-8">
+        <UploadSection onImageSelected={(src) => { setImageSrc(src); setMetrics(null); }} />
+        <HowItWorks />
+        <LandmarkGuide imageSrc={imageSrc} onMetrics={setMetrics} />
+        <ScoreCard metrics={metrics} />
+        <footer className="text-center text-xs text-slate-500 pt-8">
+          Built for fun and learning. Not medical or cosmetic advice.
+        </footer>
+      </main>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
